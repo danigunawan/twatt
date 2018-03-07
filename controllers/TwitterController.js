@@ -33,5 +33,22 @@ module.exports = {
          res.status(200).send(data)
        }
      );
+  },
+  tweet: (req,res) => {
+     oauth.post(
+       'https://api.twitter.com/1.1/statuses/update.json',
+       '2852541540-o75dBjVPTrt2dPiMzNIfSoe9H0LRG5suS3d7YbC', //test user token
+       'UMth6G3nr072bGMXxQtJ50l6uU89SqZQjqlkso4M53lxu', //test user secret
+       {status: req.body.status},
+       function (e, data){
+         if (e) {
+           res.status(500).json({
+             message: "something went wrong",
+             error: e
+           });
+         }
+         res.status(200).send(data)
+       }
+     );
   }
 };
